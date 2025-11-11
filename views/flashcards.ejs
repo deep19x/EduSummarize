@@ -1,44 +1,90 @@
 <% layout('layouts/boilerplate') %>
 
-    <div class="container mt-5 pt-4">
-        <div class="text-center mb-5">
-            <h2 class="fw-bold" style="color: #fe424d;">Flashcards</h2>
-            <p class="text-muted">Auto-generated from your most recently uploaded PDF summary.</p>
+<div class="container mt-5 pt-4">
+    <div class="text-center mb-5">
+        <h2 class="fw-bold" style="color: #a78bfa;">Flashcards</h2>
+        <p class="text-secondary">Auto-generated from your most recently uploaded PDF summary.</p>
+    </div>
+
+    <!-- Message when no upload exists -->
+    <% if (message) { %>
+        <div class="alert alert-warning text-center bg-dark border border-warning-subtle text-light shadow-sm">
+            <%= message %>
         </div>
+    <% } %>
 
-        <!-- Message when no upload exists -->
-        <% if (message) { %>
-            <div class="alert alert-warning text-center">
-                <%= message %>
-            </div>
-            <% } %>
+    <!-- Flashcards Display -->
+    <% if (flashcards && flashcards.length > 0) { %>
+        <div class="row justify-content-center mt-4">
+            <h5 class="text-center mb-4 fw-semibold" style="color: #a78bfa;">Generated Flashcards</h5>
 
-                <!-- Flashcards Display -->
-                <% if (flashcards && flashcards.length> 0) { %>
-                    <div class="row justify-content-center mt-4">
-                        <h5 class="text-center mb-4 fw-semibold" style="color: #fe424d;">Generated Flashcards</h5>
-
-                        <% flashcards.forEach((card, index)=> { %>
-                            <div class="col-md-4 mb-3">
-                                <div class="card border-0 shadow-sm h-100 p-3">
-                                    <div class="card-body text-center">
-                                        <h6 class="fw-bold">Q<%= index + 1 %>:</h6>
-                                        <p>
-                                            <%= card.question %>
-                                        </p>
-                                        <button class="btn btn-outline-danger mt-2" type="button"
-                                            data-bs-toggle="collapse" data-bs-target="#answer<%= index %>">
-                                            Show Answer
-                                        </button>
-                                        <div class="collapse mt-2" id="answer<%= index %>">
-                                            <div class="alert alert-light border">
-                                                <%= card.answer %>
-                                            </div>
-                                        </div>
-                                    </div>
+            <% flashcards.forEach((card, index) => { %>
+                <div class="col-md-4 mb-4">
+                    <div class="card flashcard h-100 p-3">
+                        <div class="card-body text-center">
+                            <h6 class="fw-bold text-light">Q<%= index + 1 %>:</h6>
+                            <p class="text-secondary"><%= card.question %></p>
+                            <button 
+                                class="btn btn-violet-outline mt-2" 
+                                type="button"
+                                data-bs-toggle="collapse" 
+                                data-bs-target="#answer<%= index %>">
+                                Show Answer
+                            </button>
+                            <div class="collapse mt-2" id="answer<%= index %>">
+                                <div class="alert bg-dark border border-violet text-light small mb-0">
+                                    <%= card.answer %>
                                 </div>
                             </div>
-                            <% }); %>
+                        </div>
                     </div>
-                    <% } %>
-    </div>
+                </div>
+            <% }); %>
+        </div>
+    <% } %>
+</div>
+
+<style>
+    body {
+        background-color: #0f0f1a;
+        color: #ddd;
+    }
+
+    .flashcard {
+        background-color: #1a1a2e;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        border-radius: 15px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        transition: all 0.3s ease-in-out;
+    }
+
+    .flashcard:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 18px rgba(167, 139, 250, 0.25);
+        border-color: rgba(167, 139, 250, 0.3);
+    }
+
+    .btn-violet-outline {
+        color: #a78bfa;
+        border: 1px solid #a78bfa;
+        border-radius: 50px;
+        font-weight: 600;
+        padding: 0.35rem 1.1rem;
+        transition: all 0.2s ease-in-out;
+        background: transparent;
+    }
+
+    .btn-violet-outline:hover {
+        background-color: #7c3aed;
+        color: #fff;
+        transform: translateY(-2px);
+    }
+
+    .border-violet {
+        border-color: #a78bfa !important;
+    }
+
+    .text-secondary {
+        color: #b0b0b0 !important;
+    }
+</style>

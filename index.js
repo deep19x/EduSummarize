@@ -69,7 +69,10 @@ app.get("/dashboard", (req, res) => {
 });
 
 // Root route
-app.get("/", (req, res) => res.redirect("/dashboard"));
+app.get("/", (req, res) => {
+    res.render("index", { currentUser: req.user, noNavbar: true });;
+});
+
 
 // Start server
 const PORT = process.env.PORT || 3000;

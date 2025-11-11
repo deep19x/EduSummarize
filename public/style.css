@@ -1,0 +1,12 @@
+body {
+  background-color: #1c1c2a;
+  color: #e0e0ff;
+}
+
+.card {
+  border-radius: 12px;
+}
+
+.btn:hover {
+  opacity: 0.9;
+}

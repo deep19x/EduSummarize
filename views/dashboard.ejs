@@ -1,48 +1,101 @@
 <% layout('layouts/boilerplate') %>
 
-    <div class="container mt-5 pt-4">
-        <div class="text-center mb-4">
-            <h2 class="fw-bold" style="color: #fe424d;">Welcome, <%= currentUser ? currentUser.username : 'User' %>!
-            </h2>
-            <p class="text-muted">Your personal learning assistant — upload, summarize, and study smarter.</p>
-        </div>
+<div class="container mt-5 pt-4">
+    <div class="text-center mb-4">
+        <h2 class="fw-bold" style="color: #a78bfa;">
+            Welcome, <%= currentUser ? currentUser.username : 'User' %>!
+        </h2>
+        <p class="text-secondary">
+            Your personal learning assistant — upload, summarize, and study smarter.
+        </p>
+    </div>
 
-        <!-- Feature cards -->
-        <div class="row justify-content-center g-4">
-            <!-- Upload & Summarize -->
-            <div class="col-md-4">
-                <div class="card shadow-sm border-0 h-100 text-center p-3">
-                    <i class="fa-solid fa-file-pdf fa-3x mb-3" style="color: #fe424d;"></i>
-                    <h5>Upload & Summarize</h5>
-                    <p class="text-muted small">Upload your study PDFs and generate quick, readable summaries.</p>
-                    <a href="/summary" class="btn text-white" style="background-color: #fe424d;">Go</a>
-                </div>
-            </div>
-
-            <!-- Flashcards -->
-            <div class="col-md-4">
-                <div class="card shadow-sm border-0 h-100 text-center p-3">
-                    <i class="fa-solid fa-layer-group fa-3x mb-3" style="color: #fe424d;"></i>
-                    <h5>Flashcards</h5>
-                    <p class="text-muted small">Review key concepts quickly with AI-generated flashcards.</p>
-                    <a href="/flashcards" class="btn text-white" style="background-color: #fe424d;">Open</a>
-                </div>
-            </div>
-
-            <!-- Quiz -->
-            <div class="col-md-4">
-                <div class="card shadow-sm border-0 h-100 text-center p-3">
-                    <i class="fa-solid fa-clipboard-question fa-3x mb-3" style="color: #fe424d;"></i>
-                    <h5>Quiz</h5>
-                    <p class="text-muted small">Test your knowledge with auto-generated questions from your notes.</p>
-                    <a href="/quiz" class="btn text-white" style="background-color: #fe424d;">Start</a>
-                </div>
+    <!-- Feature cards -->
+    <div class="row justify-content-center g-4">
+        <!-- Upload & Summarize -->
+        <div class="col-md-4">
+            <div class="card feature-card text-center p-4 h-100">
+                <i class="fa-solid fa-file-pdf fa-3x mb-3 text-violet"></i>
+                <h5 class="text-light">Upload & Summarize</h5>
+                <p class="text-secondary small">
+                    Upload your study PDFs and generate quick, readable summaries.
+                </p>
+                <a href="/summary" class="btn btn-violet mt-auto">Go</a>
             </div>
         </div>
 
-        <!-- Optional: Recent activity section -->
-        <div class="mt-5 text-center">
-            <h5 class="fw-semibold mb-3">Recent Summaries</h5>
-            <p class="text-muted small">You haven’t uploaded any PDFs yet.</p>
+        <!-- Flashcards -->
+        <div class="col-md-4">
+            <div class="card feature-card text-center p-4 h-100">
+                <i class="fa-solid fa-layer-group fa-3x mb-3 text-violet"></i>
+                <h5 class="text-light">Flashcards</h5>
+                <p class="text-secondary small">
+                    Review key concepts quickly with AI-generated flashcards.
+                </p>
+                <a href="/flashcards" class="btn btn-violet mt-auto">Open</a>
+            </div>
+        </div>
+
+        <!-- Quiz -->
+        <div class="col-md-4">
+            <div class="card feature-card text-center p-4 h-100">
+                <i class="fa-solid fa-clipboard-question fa-3x mb-3 text-violet"></i>
+                <h5 class="text-light">Quiz</h5>
+                <p class="text-secondary small">
+                    Test your knowledge with auto-generated questions from your notes.
+                </p>
+                <a href="/quiz" class="btn btn-violet mt-auto">Start</a>
+            </div>
         </div>
     </div>
+
+    <!-- Recent activity -->
+    <div class="mt-5 text-center">
+        <h5 class="fw-semibold text-light mb-3">Recent Summaries</h5>
+        <p class="text-secondary small">You haven’t uploaded any PDFs yet.</p>
+    </div>
+</div>
+
+<style>
+    body {
+        background-color: #0f0f1a;
+        color: #ddd;
+    }
+
+    .feature-card {
+        background-color: #1a1a2e;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        border-radius: 15px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        transition: all 0.3s ease-in-out;
+    }
+
+    .feature-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(167, 139, 250, 0.2);
+        border-color: rgba(167, 139, 250, 0.3);
+    }
+
+    .text-violet {
+        color: #a78bfa !important;
+    }
+
+    .btn-violet {
+        background-color: #7c3aed;
+        color: #fff;
+        border: none;
+        border-radius: 50px;
+        padding: 0.4rem 1.2rem;
+        font-weight: 600;
+        transition: all 0.2s ease-in-out;
+    }
+
+    .btn-violet:hover {
+        background-color: #6d28d9;
+        transform: translateY(-2px);
+    }
+
+    .text-secondary {
+        color: #b0b0b0 !important;
+    }
+</style>

@@ -1,27 +1,155 @@
 <% layout('layouts/boilerplate') %>
 
-    <div class="container text-center mt-5 pt-4">
-        <div class="row justify-content-center align-items-center" style="min-height: 70vh;">
-            <div class="col-md-8">
-                <h1 class="fw-bold mb-3" style="color: #fe424d;">Welcome to EDU-Summarize</h1>
-                <p class="lead text-muted mb-4">
-                    Upload your study PDFs and let our AI instantly generate concise summaries,
-                    quizzes, and flashcards — helping you learn smarter and faster.
-                </p>
+    <div class="animated-bg">
+        <div class="container-fluid text-center mt-5 pt-5">
+            <!-- Hero Section -->
+            <div class="row justify-content-center align-items-center" style="min-height: 70vh;">
+                <div class="col-lg-8">
+                    <h1 class="fw-bold mb-3 hero-title">Welcome to EDU-Summarize</h1>
+                    <p class="lead text-secondary mb-4 hero-text" style="font-size: 1.2rem;">
+                        Upload your study PDFs and let our AI instantly generate concise <strong>summaries</strong>,
+                        <strong>quizzes</strong>, and <strong>flashcards</strong> — helping you learn smarter and
+                        faster.
+                    </p>
 
-                <div class="d-flex justify-content-center gap-3 mt-4">
-                    <% if (!currentUser) { %>
-                        <a href="/login" class="btn btn-primary px-4 py-2">Login</a>
-                        <a href="/register" class="btn btn-outline-primary px-4 py-2">Sign Up</a>
-                        <% } else { %>
-                            <a href="/dashboard" class="btn btn-success px-4 py-2">Go to Dashboard</a>
-                            <% } %>
-                </div>
+                    <!-- Get Started Buttons -->
+                    <div class="d-flex justify-content-center gap-3 mt-4">
+                        <% if (!currentUser) { %>
+                            <a href="/login" class="btn btn-violet-outline px-4 py-2 fw-semibold">Get Started</a>
+                            <a href="/register" class="btn btn-outline-light px-4 py-2 fw-semibold">Sign Up</a>
+                            <% } else { %>
+                                <a href="/dashboard" class="btn btn-success px-4 py-2 fw-semibold">Go to Dashboard</a>
+                                <% } %>
+                    </div>
 
-                <div class="mt-5">
-                    <img src="https://cdn-icons-png.flaticon.com/512/3308/3308395.png" alt="AI Summarizer"
-                        class="img-fluid" style="max-width: 160px; opacity: 0.9;">
+                    <!-- Hero Image -->
+                    <div class="mt-5">
+                        <img src="https://cdn-icons-png.flaticon.com/512/3308/3308395.png" alt="AI Summarizer"
+                            class="img-fluid" style="max-width: 180px; opacity: 0.9;">
+                    </div>
                 </div>
             </div>
+
+            <!-- Features Section -->
+            <!-- Features Section -->
+            <div class="row text-center mt-5 features-section">
+                <h3 class="fw-bold mb-4">Features</h3>
+
+                <div class="col-md-4 mb-4">
+                    <div class="card feature-card p-4 h-100">
+                        <img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" alt="PDF Summary" class="mb-3"
+                            style="width:60px;">
+                        <h5 class="fw-semibold mb-2">Instant Summaries</h5>
+                        <p class="text-secondary">Generate concise summaries from your uploaded PDFs to save time and
+                            focus on key points.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-4 mb-4">
+                    <div class="card feature-card p-4 h-100">
+                        <img src="https://cdn-icons-png.flaticon.com/512/2922/2922510.png" alt="Flashcards" class="mb-3"
+                            style="width:60px;">
+                        <h5 class="fw-semibold mb-2">Interactive Flashcards</h5>
+                        <p class="text-secondary">Turn important sentences into engaging flashcards for quick revision
+                            and better retention.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-4 mb-4">
+                    <div class="card feature-card p-4 h-100">
+                        <img src="https://cdn-icons-png.flaticon.com/512/1250/1250615.png" alt="Quizzes" class="mb-3"
+                            style="width:60px;">
+                        <h5 class="fw-semibold mb-2">Smart Quizzes</h5>
+                        <p class="text-secondary">Test your understanding with AI-generated quizzes directly from your
+                            PDF content.</p>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
+
+    <style>
+        /* Animated gradient background */
+        .animated-bg {
+            background: linear-gradient(-45deg, #0f0f1a, #1a1a2e, #2b2b40, #0f0f1a);
+            background-size: 400% 400%;
+            animation: gradientAnimation 20s ease infinite;
+            min-height: 100vh;
+            padding-bottom: 50px;
+        }
+
+        @keyframes gradientAnimation {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #0f0f1a;
+            /* dark theme */
+            color: #ddd;
+        }
+
+        h1,
+        h3,
+        h5 {
+            color: #a78bfa;
+        }
+
+        .btn-violet-outline {
+            color: #a78bfa;
+            border: 2px solid #a78bfa;
+            border-radius: 50px;
+            font-weight: 600;
+            padding: 0.45rem 1.2rem;
+            transition: all 0.3s ease-in-out;
+            background: transparent;
+        }
+
+        .btn-violet-outline:hover {
+            background-color: #7c3aed;
+            color: #fff;
+            transform: translateY(-2px);
+        }
+
+        .feature-card {
+            background-color: rgba(26, 26, 46, 0.9);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease-in-out;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 18px rgba(167, 139, 250, 0.25);
+            border-color: rgba(167, 139, 250, 0.3);
+        }
+
+        .hero-title {
+            font-size: 3rem;
+        }
+
+        .hero-text {
+            font-size: 1.25rem;
+        }
+
+        .full-height {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+    </style>

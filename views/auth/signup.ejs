@@ -1,48 +1,98 @@
 <% layout('layouts/boilerplate') %>
 
-    <div class="container mt-5 pt-4">
-        <div class="row justify-content-center">
-            <div class="col-md-6">
-                <div class="card shadow-sm border-0 p-4">
-                    <h2 class="text-center mb-4" style="color: #fe424d;">Create Your Account</h2>
+<style>
+    body {
+        background-color: #0d0b1e; /* deep dark violet background */
+        color: #e0e0e0;
+    }
 
-                    <!-- Flash message placeholder -->
-                    <%- include("../includes/flash") %>
+    .card {
+        background-color: #1a1333; /* dark violet card */
+        color: #e0e0e0;
+        border: none;
+        border-radius: 1rem;
+        box-shadow: 0 0 15px rgba(150, 80, 255, 0.3);
+    }
 
-                        <form action="/register" method="POST" novalidate class="needs-validation">
-                            <div class="mb-3">
-                                <label for="username" class="form-label">Username</label>
-                                <input type="text" name="username" id="username" placeholder="Enter your username"
-                                    class="form-control" required />
-                                <div class="invalid-feedback">Please enter your username</div>
-                            </div>
+    .form-control {
+        background-color: #2a1f47;
+        color: #fff;
+        border: 1px solid #6a4fc1;
+    }
 
-                            <div class="mb-3">
-                                <label for="email" class="form-label">Email</label>
-                                <input type="email" name="email" id="email" placeholder="Enter your email"
-                                    class="form-control" required />
-                                <div class="invalid-feedback">Please enter a valid email</div>
-                            </div>
+    .form-control::placeholder {
+        color: #b6a8e9;
+    }
 
-                            <div class="mb-3">
-                                <label for="password" class="form-label">Password</label>
-                                <input type="password" name="password" id="password" placeholder="Create a password"
-                                    class="form-control" required />
-                                <div class="invalid-feedback">Please enter your password</div>
-                            </div>
+    .form-control:focus {
+        border-color: #b084ff;
+        box-shadow: 0 0 8px rgba(176, 132, 255, 0.4);
+    }
 
-                            <div class="d-grid">
-                                <button class="btn text-white" style="background-color: #fe424d;">
-                                    Sign Up
-                                </button>
-                            </div>
-                        </form>
+    .btn-custom {
+        background: linear-gradient(90deg, #6a4fc1, #b084ff);
+        border: none;
+        color: white;
+        font-weight: 600;
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
 
-                        <p class="text-center mt-3 mb-0">
-                            Already have an account?
-                            <a href="./login.ejs" class="text-decoration-none" style="color: #fe424d;">Login here</a>
-                        </p>
-                </div>
+    .btn-custom:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 10px rgba(176, 132, 255, 0.5);
+    }
+
+    a {
+        color: #b084ff;
+    }
+
+    a:hover {
+        text-decoration: underline;
+        color: #c9a8ff;
+    }
+</style>
+
+<div class="container mt-5 pt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card p-4">
+                <h2 class="text-center mb-4" style="color: #b084ff;">Create Your Account</h2>
+
+                <!-- Flash message placeholder -->
+                <%- include("../includes/flash") %>
+
+                <form action="/signup" method="POST" novalidate class="needs-validation">
+                    <div class="mb-3">
+                        <label for="username" class="form-label">Username</label>
+                        <input type="text" name="username" id="username" placeholder="Enter your username"
+                            class="form-control" required />
+                        <div class="invalid-feedback">Please enter your username</div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" name="email" id="email" placeholder="Enter your email"
+                            class="form-control" required />
+                        <div class="invalid-feedback">Please enter a valid email</div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" name="password" id="password" placeholder="Create a password"
+                            class="form-control" required />
+                        <div class="invalid-feedback">Please enter your password</div>
+                    </div>
+
+                    <div class="d-grid">
+                        <button class="btn btn-custom py-2 rounded-3">Sign Up</button>
+                    </div>
+                </form>
+
+                <p class="text-center mt-3 mb-0">
+                    Already have an account?
+                    <a href="/login">Login here</a>
+                </p>
             </div>
         </div>
     </div>
+</div>

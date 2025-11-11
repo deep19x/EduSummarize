@@ -1,28 +1,37 @@
 <style>
     footer {
-        background-color: #f8f9fa;
-        border-top: 1px solid #ddd;
-        padding: 1rem 0;
+        background-color: #121212; /* Dark background */
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 0.6rem 0; /* Reduced vertical padding */
         text-align: center;
-        font-size: 0.9rem;
-        color: #555;
-        margin-top: 3rem;
+        font-size: 0.85rem; /* Slightly smaller text */
+        color: #cfcfcf;
+        margin-top: 2rem; /* Less top margin */
+        line-height: 1.4; /* Compact line spacing */
+    }
+
+    .f-links {
+        margin-top: 0.3rem; /* Less gap between text and links */
     }
 
     .f-links a {
-        margin: 0 10px;
-        color: #fe424d;
+        margin: 0 8px;
+        color: #a78bfa; /* Soft violet */
         text-decoration: none;
+        font-weight: 500;
+        transition: color 0.2s ease-in-out;
+        font-size: 0.85rem;
     }
 
     .f-links a:hover {
+        color: #c4b5fd;
         text-decoration: underline;
     }
 </style>
 
 <footer>
     <div>&copy; <%= new Date().getFullYear() %> EDU-Summarize | All Rights Reserved</div>
-    <div class="f-links mt-2">
+    <div class="f-links">
         <a href="/about">About</a>
         <a href="/contact">Contact</a>
         <a href="/privacy">Privacy Policy</a>

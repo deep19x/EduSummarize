@@ -1,64 +1,104 @@
 <% layout('layouts/boilerplate') %>
 
-    <div class="container mt-5 pt-4">
-        <div class="text-center mb-5">
-            <h2 class="fw-bold" style="color: #fe424d;">Quiz</h2>
-            <p class="text-muted">Test your understanding from your most recently uploaded PDF summary.</p>
-        </div>
-
-        <!-- Message when no upload exists -->
-        <% if (message) { %>
-            <div class="alert alert-warning text-center">
-                <%= message %>
-            </div>
-            <% } %>
-
-                <!-- Quiz Questions -->
-                <% if (questions && questions.length> 0) { %>
-                    <form action="/quiz/submit" method="POST" class="row justify-content-center">
-                        <div class="col-md-10">
-                            <% questions.forEach((q, index)=> { %>
-                                <div class="card border-0 shadow-sm mb-4 p-3">
-                                    <div class="card-body">
-                                        <h6 class="fw-bold mb-3" style="color: #fe424d;">Q<%= index + 1 %>. <%=
-                                                    q.question %>
-                                        </h6>
-                                        <% q.options.forEach((option, optIndex)=> { %>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="answer<%= index %>"
-                                                    id="q<%= index %>opt<%= optIndex %>" value="<%= option %>"
-                                                    required />
-                                                <label class="form-check-label" for="q<%= index %>opt<%= optIndex %>">
-                                                    <%= option %>
-                                                </label>
-                                            </div>
-                                            <% }); %>
-                                    </div>
-                                </div>
-                                <% }); %>
-                                    <div class="text-center mt-4">
-                                        <button class="btn text-white px-4" style="background-color: #fe424d;">Submit
-                                            Quiz</button>
-                                    </div>
-                        </div>
-                    </form>
-                    <% } %>
-
-                        <!-- Quiz Results -->
-                        <% if (score !==undefined) { %>
-                            <div class="row justify-content-center mt-5">
-                                <div class="col-md-6 text-center">
-                                    <div class="card border-0 shadow-sm p-4">
-                                        <h4 class="fw-bold" style="color: #fe424d;">Quiz Completed!</h4>
-                                        <p class="mt-3">You scored <strong>
-                                                <%= score %>
-                                            </strong> out of <strong>
-                                                <%= total %>
-                                            </strong>.</p>
-                                        <a href="/dashboard" class="btn text-white mt-3"
-                                            style="background-color: #fe424d;">Back to Dashboard</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <% } %>
+<div class="container mt-5 pt-4 text-light">
+    <div class="text-center mb-5">
+        <h2 class="fw-bold" style="color: #a48fff;">Quiz</h2>
+        <p class="text-muted">Test your understanding from your most recently uploaded PDF summary.</p>
     </div>
+
+    <!-- Message when no upload exists -->
+    <% if (message) { %>
+        <div class="alert alert-warning text-center bg-dark border-0 text-light">
+            <%= message %>
+        </div>
+    <% } %>
+
+    <!-- Quiz Questions -->
+    <% if (questions && questions.length > 0) { %>
+        <form action="/quiz/submit" method="POST" class="row justify-content-center">
+            <div class="col-md-10">
+                <% for (let index = 0; index < questions.length; index++) { 
+                    let q = questions[index];
+                    let userAnswer = (typeof score !== 'undefined' && submittedAnswers) ? submittedAnswers[index] : undefined;
+                %>
+                    <div class="card border-0 shadow-sm mb-4" style="background-color: #2b2b40;">
+                        <div class="card-body">
+                            <h6 class="fw-bold mb-3" style="color: #b085f5;">
+                                Q<%= index + 1 %>. <%= q.question %>
+                            </h6>
+
+                            <% for (let optIndex = 0; optIndex < q.options.length; optIndex++) { 
+                                let option = q.options[optIndex];
+                                let bgClass = "";
+                                if (userAnswer !== undefined) {
+                                    if (option === q.correctAnswer) bgClass = "bg-success text-light";
+                                    else if (option === userAnswer && option !== q.correctAnswer) bgClass = "bg-danger text-light";
+                                }
+                            %>
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input bg-dark border-light" type="radio"
+                                        name="answer<%= index %>"
+                                        id="q<%= index %>opt<%= optIndex %>"
+                                        value="<%= option %>"
+                                        <% if (userAnswer === option) { %> checked <% } %>
+                                        <% if (userAnswer !== undefined) { %> disabled <% } %>>
+                                    <label class="form-check-label <%= bgClass %>"
+                                        for="q<%= index %>opt<%= optIndex %>">
+                                        <%= option %>
+                                    </label>
+                                </div>
+                            <% } %>
+
+                        </div>
+                    </div>
+                <% } %>
+
+                <% if (typeof score === 'undefined') { %>
+                    <div class="text-center mt-4">
+                        <button class="btn text-white px-4 py-2 rounded-3"
+                            style="background-color: #6a0dad; border: none;">
+                            Submit Quiz
+                        </button>
+                    </div>
+                <% } %>
+            </div>
+        </form>
+    <% } %>
+
+    <!-- Quiz Results -->
+    <% if (typeof score !== 'undefined') { %>
+        <div class="row justify-content-center mt-5">
+            <div class="col-md-6 text-center">
+                <div class="card border-0 shadow-sm p-4" style="background-color: #2b2b40;">
+                    <h4 class="fw-bold" style="color: #b085f5;">Quiz Completed!</h4>
+                    <p class="mt-3">You scored <strong><%= score %></strong> out of <strong><%= total %></strong>.</p>
+                    <a href="/dashboard" class="btn text-white mt-3"
+                        style="background-color: #6a0dad; border: none;">Back to Dashboard</a>
+                </div>
+            </div>
+        </div>
+    <% } %>
+</div>
+
+<style>
+    body {
+        background-color: #0f0f1a;
+        color: #ddd;
+    }
+
+    .card {
+        border-radius: 12px;
+    }
+
+    .btn {
+        transition: all 0.2s ease-in-out;
+    }
+
+    .bg-success {
+        background-color: #198754 !important;
+    }
+
+    .bg-danger {
+        background-color: #dc3545 !important;
+    }
+</style>
