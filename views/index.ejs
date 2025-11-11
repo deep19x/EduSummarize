@@ -1,0 +1,27 @@
+<% layout('layouts/boilerplate') %>
+
+    <div class="container text-center mt-5 pt-4">
+        <div class="row justify-content-center align-items-center" style="min-height: 70vh;">
+            <div class="col-md-8">
+                <h1 class="fw-bold mb-3" style="color: #fe424d;">Welcome to EDU-Summarize</h1>
+                <p class="lead text-muted mb-4">
+                    Upload your study PDFs and let our AI instantly generate concise summaries,
+                    quizzes, and flashcards — helping you learn smarter and faster.
+                </p>
+
+                <div class="d-flex justify-content-center gap-3 mt-4">
+                    <% if (!currentUser) { %>
+                        <a href="/login" class="btn btn-primary px-4 py-2">Login</a>
+                        <a href="/register" class="btn btn-outline-primary px-4 py-2">Sign Up</a>
+                        <% } else { %>
+                            <a href="/dashboard" class="btn btn-success px-4 py-2">Go to Dashboard</a>
+                            <% } %>
+                </div>
+
+                <div class="mt-5">
+                    <img src="https://cdn-icons-png.flaticon.com/512/3308/3308395.png" alt="AI Summarizer"
+                        class="img-fluid" style="max-width: 160px; opacity: 0.9;">
+                </div>
+            </div>
+        </div>
+    </div>

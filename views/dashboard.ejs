@@ -1,0 +1,48 @@
+<% layout('layouts/boilerplate') %>
+
+    <div class="container mt-5 pt-4">
+        <div class="text-center mb-4">
+            <h2 class="fw-bold" style="color: #fe424d;">Welcome, <%= currentUser ? currentUser.username : 'User' %>!
+            </h2>
+            <p class="text-muted">Your personal learning assistant — upload, summarize, and study smarter.</p>
+        </div>
+
+        <!-- Feature cards -->
+        <div class="row justify-content-center g-4">
+            <!-- Upload & Summarize -->
+            <div class="col-md-4">
+                <div class="card shadow-sm border-0 h-100 text-center p-3">
+                    <i class="fa-solid fa-file-pdf fa-3x mb-3" style="color: #fe424d;"></i>
+                    <h5>Upload & Summarize</h5>
+                    <p class="text-muted small">Upload your study PDFs and generate quick, readable summaries.</p>
+                    <a href="/summary" class="btn text-white" style="background-color: #fe424d;">Go</a>
+                </div>
+            </div>
+
+            <!-- Flashcards -->
+            <div class="col-md-4">
+                <div class="card shadow-sm border-0 h-100 text-center p-3">
+                    <i class="fa-solid fa-layer-group fa-3x mb-3" style="color: #fe424d;"></i>
+                    <h5>Flashcards</h5>
+                    <p class="text-muted small">Review key concepts quickly with AI-generated flashcards.</p>
+                    <a href="/flashcards" class="btn text-white" style="background-color: #fe424d;">Open</a>
+                </div>
+            </div>
+
+            <!-- Quiz -->
+            <div class="col-md-4">
+                <div class="card shadow-sm border-0 h-100 text-center p-3">
+                    <i class="fa-solid fa-clipboard-question fa-3x mb-3" style="color: #fe424d;"></i>
+                    <h5>Quiz</h5>
+                    <p class="text-muted small">Test your knowledge with auto-generated questions from your notes.</p>
+                    <a href="/quiz" class="btn text-white" style="background-color: #fe424d;">Start</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Optional: Recent activity section -->
+        <div class="mt-5 text-center">
+            <h5 class="fw-semibold mb-3">Recent Summaries</h5>
+            <p class="text-muted small">You haven’t uploaded any PDFs yet.</p>
+        </div>
+    </div>

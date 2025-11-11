@@ -1,0 +1,45 @@
+<% layout('layouts/boilerplate') %>
+
+    <div class="container d-flex align-items-center justify-content-center min-vh-100">
+        <div class="card shadow-lg border-0 rounded-4 p-4" style="max-width: 420px; width: 100%;">
+            <div class="text-center mb-4">
+                <h2 class="fw-bold text-danger">Login</h2>
+                <p class="text-muted">Welcome back! Please enter your credentials.</p>
+            </div>
+
+            <!-- Flash message placeholder -->
+            <%- include("../includes/flash") %>
+
+                <form action="/login" method="POST" novalidate class="needs-validation">
+                    <div class="mb-3">
+                        <label for="username" class="form-label fw-semibold">Username</label>
+                        <input type="text" name="username" id="username" placeholder="Enter your username"
+                            class="form-control rounded-3 py-2" required />
+                        <div class="invalid-feedback">Please enter your username</div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="password" class="form-label fw-semibold">Password</label>
+                        <input type="password" name="password" id="password" placeholder="Enter your password"
+                            class="form-control rounded-3 py-2" required />
+                        <div class="invalid-feedback">Please enter your password</div>
+                    </div>
+
+                    <div class="d-grid mt-4">
+                        <button class="btn btn-danger rounded-3 py-2 fw-semibold">
+                            Login
+                        </button>
+                    </div>
+                </form>
+
+                <form action="/signup" method="get" class="text-center mt-3">
+                    <small class="text-muted">
+                        Don’t have an account?
+                        <button type="submit" class="btn btn-link text-danger fw-semibold p-0 text-decoration-none">
+                            Sign up here
+                        </button>
+                    </small>
+                </form>
+
+        </div>
+    </div>
