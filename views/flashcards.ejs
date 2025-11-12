@@ -23,19 +23,23 @@
                     <div class="card flashcard h-100 p-3">
                         <div class="card-body text-center">
                             <h6 class="fw-bold text-light">Q<%= index + 1 %>:</h6>
-                            <p class="text-secondary"><%= card.question %></p>
-                            <button 
-                                class="btn btn-violet-outline mt-2" 
-                                type="button"
-                                data-bs-toggle="collapse" 
-                                data-bs-target="#answer<%= index %>">
-                                Show Answer
-                            </button>
-                            <div class="collapse mt-2" id="answer<%= index %>">
-                                <div class="alert bg-dark border border-violet text-light small mb-0">
-                                    <%= card.answer %>
+                            <p class="text-secondary">
+                                <%= typeof card === 'string' ? card : card.question %>
+                            </p>
+                            <% if (typeof card !== 'string') { %>
+                                <button 
+                                    class="btn btn-violet-outline mt-2" 
+                                    type="button"
+                                    data-bs-toggle="collapse" 
+                                    data-bs-target="#answer<%= index %>">
+                                    Show Answer
+                                </button>
+                                <div class="collapse mt-2" id="answer<%= index %>">
+                                    <div class="alert bg-dark border border-violet text-light small mb-0">
+                                        <%= card.answer %>
+                                    </div>
                                 </div>
-                            </div>
+                            <% } %>
                         </div>
                     </div>
                 </div>

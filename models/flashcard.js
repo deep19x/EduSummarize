@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const flashcardSchema = new Schema({
   upload: {
     type: Schema.Types.ObjectId,
-    ref: "Upload", // Links each flashcard set to a specific uploaded PDF
+    ref: "Upload",
     required: true,
   },
   question: {

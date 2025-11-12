@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const quizSchema = new Schema({
     upload: {
         type: Schema.Types.ObjectId,
-        ref: "Upload", // Links this quiz to the uploaded PDF
+        ref: "Upload", 
         required: true,
     },
     question: {
@@ -12,11 +12,11 @@ const quizSchema = new Schema({
         required: true,
     },
     options: {
-        type: [String], // Multiple-choice options
+        type: [String], 
         required: true,
     },
     correctAnswer: {
-        type: String, // The right answer among the options
+        type: String,
         required: true,
     },
     createdAt: {

@@ -50,9 +50,34 @@
     </div>
 
     <!-- Recent activity -->
-    <div class="mt-5 text-center">
-        <h5 class="fw-semibold text-light mb-3">Recent Summaries</h5>
-        <p class="text-secondary small">You haven’t uploaded any PDFs yet.</p>
+    <div class="mt-5">
+        <h5 class="fw-semibold text-light text-center mb-4">Recent Summaries</h5>
+
+        <% if (recentUploads && recentUploads.length > 0) { %>
+            <div class="row g-4">
+                <% recentUploads.forEach(upload => { %>
+                    <div class="col-md-4">
+                        <div class="card recent-card p-3 h-100">
+                            <div class="d-flex justify-content-between align-items-start">
+                                <div>
+                                    <h6 class="text-light mb-1"><%= upload.fileName %></h6>
+                                    <p class="text-secondary small mb-2">
+                                        Uploaded: <%= new Date(upload.createdAt).toLocaleDateString() %>
+                                    </p>
+                                </div>
+                                <i class="fa-solid fa-file-lines text-violet"></i>
+                            </div>
+                            <p class="text-secondary small mb-3">
+                                <%= upload.summary.length > 100 ? upload.summary.substring(0, 100) + '...' : upload.summary %>
+                            </p>
+                            <a href="/summary/<%= upload._id %>" class="btn btn-violet btn-sm mt-auto">View Full Summary</a>
+                        </div>
+                    </div>
+                <% }) %>
+            </div>
+        <% } else { %>
+            <p class="text-secondary text-center small">You haven’t uploaded any PDFs yet.</p>
+        <% } %>
     </div>
 </div>
 
@@ -74,6 +99,18 @@
         transform: translateY(-5px);
         box-shadow: 0 8px 20px rgba(167, 139, 250, 0.2);
         border-color: rgba(167, 139, 250, 0.3);
+    }
+
+    .recent-card {
+        background-color: #1a1a2e;
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        transition: all 0.3s ease-in-out;
+    }
+
+    .recent-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 6px 18px rgba(167, 139, 250, 0.2);
     }
 
     .text-violet {

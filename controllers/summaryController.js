@@ -1,13 +1,13 @@
 require('dotenv').config();
 const fs = require('fs');
-const { PdfReader } = require('pdfreader'); // pdfreader
+const { PdfReader } = require('pdfreader');
 const Upload = require('../models/upload');
 const { GoogleGenAI } = require('@google/genai');
 
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEYY });
+const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 
 module.exports.renderSummaryPage = (req, res) => {
-    res.render('summary', { summary: null });
+    res.render('summary', { summary: null, noNavbar: false });
 };
 
 module.exports.uploadSummary = async (req, res) => {
@@ -21,31 +21,32 @@ module.exports.uploadSummary = async (req, res) => {
         const filePath = req.file.path;
         let pdfText = "";
 
-        // --- PDFReader parsing ---
         await new Promise((resolve, reject) => {
             new PdfReader().parseFileItems(filePath, (err, item) => {
                 if (err) return reject(err);
-                if (!item) return resolve(); // finished reading
+                if (!item) return resolve();
                 if (item.text) pdfText += item.text + " ";
             });
         });
 
-        console.log("✅ PDF Text Extracted:", pdfText.substring(0, 500)); // first 500 chars
+        console.log("✅ PDF Text Extracted:", pdfText.substring(0, 500));
 
-        // --- Gemini API Call for Summary ---
-        const systemInstruction = `You are a professional summarization engine. Summarize the user-provided document text in clear, concise, and structured format.Use:
-        - Paragraphs for main ideas
-        - Bullet points for lists
-        - **Bold** for key terms
-        - Line breaks for readability
-        The summary should be professional, easy to read, and suitable as study notes.`;
-
+        const systemInstruction = `
+You are a professional summarization assistant.
+Summarize the provided document text into clear and readable study notes.
+Use:
+- Short paragraphs for main ideas
+- Bullet points for clarity
+- Simple text (no special characters or Markdown)
+- Indentation and line breaks for structure
+Write in plain English, suitable for a student to revise from.
+`;
 
         const userQuery = `Please summarize the following document text:\n\nDOCUMENT TEXT:\n---\n${pdfText}\n---`;
 
         try {
             const geminiResponse = await ai.models.generateContent({
-                model: "gemini-2.5-pro",
+                model: "gemini-2.5-flash",
                 contents: userQuery,
                 systemInstruction: systemInstruction
             });
@@ -53,13 +54,11 @@ module.exports.uploadSummary = async (req, res) => {
             summary = geminiResponse.text.trim();
         } catch (apiErr) {
             console.error("❌ Gemini API Error:", apiErr);
-            // Handle 503 overload error gracefully
             if (apiErr.status === 503) {
                 summary = "The AI service is currently busy. Please try again in a few moments.";
             }
         }
 
-        // --- Save to DB ---
         const newUpload = new Upload({
             user: req.user._id,
             fileName: req.file.originalname,
@@ -68,10 +67,10 @@ module.exports.uploadSummary = async (req, res) => {
         });
         await newUpload.save();
 
-        res.render("summary", { summary });
+        res.render("summary", { summary, noNavbar: false });
 
     } catch (err) {
         console.error("❌ Error during PDF parsing or summary generation:", err);
-        res.render("summary", { summary });
+        res.render("summary", { summary, noNavbar: false });
     }
 };

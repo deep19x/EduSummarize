@@ -8,6 +8,7 @@ const passport = require("passport");
 const flash = require("connect-flash");
 const LocalStrategy = require("passport-local");
 const User = require("./models/user");
+const Upload = require("./models/upload");
 
 // Import routes
 const authRoutes = require("./routes/auth");
@@ -49,6 +50,11 @@ app.use((req, res, next) => {
     next();
 });
 
+app.use((req, res, next) => {
+    res.locals.noNavbar = false;
+    next();
+});
+
 // Connect to MongoDB
 mongoose
     .connect(process.env.MONGO_URL)
@@ -62,11 +68,23 @@ app.use("/summary", summaryRoutes);
 app.use("/flashcards", flashcardRoutes);
 app.use("/quiz", quizRoutes);
 
-// Dashboard (simple render)
-app.get("/dashboard", (req, res) => {
+// Dashboard
+app.get("/dashboard", async (req, res) => {
     if (!req.isAuthenticated()) return res.redirect("/login");
-    res.render("dashboard");
+
+    try {
+        const recentUploads = await Upload.find({ user: req.user._id })
+            .sort({ createdAt: -1 })
+            .limit(5);
+
+        res.render("dashboard", { recentUploads });
+    } catch (err) {
+        console.error("❌ Error fetching uploads:", err);
+        req.flash("error", "Could not load your uploads.");
+        res.redirect("/");
+    }
 });
+
 
 // Root route
 app.get("/", (req, res) => {

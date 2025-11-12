@@ -2,7 +2,7 @@ const User = require("../models/user");
 
 // GET Signup
 module.exports.renderSignup = (req, res) => {
-    res.render("auth/signup");
+    res.render("auth/signup", { noNavbar: true });
 };
 
 // POST Signup
@@ -11,6 +11,7 @@ module.exports.signup = async (req, res, next) => {
         const { username, email, password } = req.body;
         const user = new User({ username, email });
         const registeredUser = await User.register(user, password);
+
         req.login(registeredUser, (err) => {
             if (err) return next(err);
             req.flash("success", "Welcome to EDU-Summarize!");
@@ -18,16 +19,16 @@ module.exports.signup = async (req, res, next) => {
         });
     } catch (e) {
         req.flash("error", e.message);
-        res.redirect("auth/signup");
+        res.redirect("/signup");
     }
 };
 
 // GET Login
 module.exports.renderLogin = (req, res) => {
-    res.render("auth/login");
+    res.render("auth/login", { noNavbar: true });
 };
 
-// POST Login (handled in routes with Passport)
+// POST Login
 module.exports.login = (req, res) => {
     req.flash("success", "Welcome back!");
     res.redirect("/dashboard");

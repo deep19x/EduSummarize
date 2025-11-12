@@ -1,47 +1,35 @@
 <style>
-    /* Color Palette Variables (Optional, but recommended for large projects) */
     :root {
         --primary-color: #8b5cf6;
-        /* Soft Violet (main accent) */
         --primary-hover: #7c3aed;
-        /* Deep Violet on hover */
         --text-dark: #f3f3f3;
-        /* Light text for dark background */
         --bg-light: #1a1a1a;
-        /* Dark background */
         --shadow-light: rgba(255, 255, 255, 0.1);
-        /* Soft white shadow for contrast */
     }
 
     /* Navbar Container */
     .navbar {
         background-color: var(--bg-light);
         box-shadow: 0 2px 8px var(--shadow-light);
-        /* Slightly deeper shadow */
         padding: 0.5rem 1rem;
-        /* Add a little vertical padding */
     }
 
     /* Navbar Brand/Logo */
     .navbar-brand {
         font-weight: 700;
         font-size: 1.5rem;
-        /* Slightly larger for emphasis */
         color: var(--primary-color) !important;
-        /* Ensure primary color dominance */
         transition: 0.2s ease-in-out;
     }
 
     .navbar-brand:hover {
         opacity: 0.85;
-        /* Subtle hover effect */
     }
 
     /* Regular Navigation Links */
     .nav-link {
         font-weight: 500;
         color: var(--text-dark);
-        /* Ensure standard link color */
         transition: color 0.2s ease-in-out;
     }
 
@@ -61,15 +49,11 @@
     .btn-main {
         background-color: var(--primary-color);
         color: var(--bg-light) !important;
-        /* Make sure text is white */
         border: 1px solid var(--primary-color);
         border-radius: 50px;
-        /* Use a full pill shape for buttons */
         padding: 0.35rem 1.25rem;
-        /* Slightly more padding for better click area */
         font-weight: 600;
         text-transform: none;
-        /* Keep text natural case */
         transition: all 0.2s ease-in-out;
     }
 
@@ -78,11 +62,8 @@
         border-color: var(--primary-hover);
         color: var(--bg-light) !important;
         transform: translateY(-1px);
-        /* Subtle lift effect */
     }
 
-    /* Secondary Button Style (For 'Login' when 'Sign Up' is primary) */
-    /* I recommend making 'Login' secondary so 'Sign Up' stands out more */
     .btn-secondary-outline {
         background-color: transparent;
         color: var(--primary-color) !important;

@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const uploadSchema = new Schema({
     user: {
         type: Schema.Types.ObjectId,
-        ref: "User", // Links each upload to the user who uploaded it
+        ref: "User", 
         required: true,
     },
     fileName: {
